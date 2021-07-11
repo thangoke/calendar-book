@@ -16,7 +16,7 @@ public class MeetingRoom extends AuditableEntity {
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {@Parameter(name = "sequence_name", value = "meeting_room_seq")}
     )
-    private String id;
+    private Long id;
 
     @Column(name = "room_name")
     private String roomName;
@@ -30,7 +30,7 @@ public class MeetingRoom extends AuditableEntity {
     @Column(name = "active")
     private Boolean active;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

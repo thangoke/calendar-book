@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MeetingRoomDTO {
     @JsonProperty("id")
-    public String id;
+    public Long id;
 
     @JsonProperty("room_name")
     public String roomName;

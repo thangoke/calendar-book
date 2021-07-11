@@ -22,12 +22,17 @@ public class MeetingRoomController {
 
     @GetMapping("/get/{id}")
     @ResponseBody
-    MeetingRoomDTO listAllMeetingRoom(@RequestParam String id) {
+    MeetingRoomDTO listAllMeetingRoom(@RequestParam Long id) {
         MeetingRoomDTO result = meetingRoomService.getMeetingRoomById(id);
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Room does not exist");
         }
 
         return result;
+    }
+
+    @PostMapping("/add")
+    MeetingRoomDTO addMeetingRoom(@RequestBody MeetingRoomDTO dto) {
+        return meetingRoomService.addMeetingRoom(dto);
     }
 }

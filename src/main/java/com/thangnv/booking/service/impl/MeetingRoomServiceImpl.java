@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -42,8 +43,22 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     }
 
     @Override
-    public MeetingRoomDTO getMeetingRoomById(String id) {
+    public MeetingRoomDTO getMeetingRoomById(Long id) {
         Optional<MeetingRoom> optionalMeetingRoom = meetingRoomRepository.findById(id);
         return optionalMeetingRoom.map(this::meetingRoom2DTO).orElse(null);
+    }
+
+    @Override
+    public MeetingRoomDTO addMeetingRoom(MeetingRoomDTO dto) {
+        Objects.requireNonNull(dto);
+
+        MeetingRoom meetingRoom = new MeetingRoom();
+        meetingRoom.setRoomName(dto.roomName);
+        meetingRoom.setCapacity(dto.capacity);
+        meetingRoom.setHasDisplayDevice(dto.hasDisplayDevice);
+        meetingRoom.setActive(dto.active);
+
+        MeetingRoom persisted = meetingRoomRepository.save(meetingRoom);
+        return this.meetingRoom2DTO(persisted);
     }
 }
