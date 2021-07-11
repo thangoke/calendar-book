@@ -14,11 +14,25 @@ public class MeetingRoom extends AuditableEntity {
     @Column(name = "id", columnDefinition = "VARCHAR(255)", insertable = false, updatable = false, nullable = false)
     private String id;
 
+    @Column(name = "room_name")
+    private String roomName;
+
     @Column(name = "has_display_device")
     private Boolean hasDisplayDevice;
 
+    @Column(name = "capacity")
+    private Integer capacity;
+
     @Column(name = "active")
     private Boolean active;
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 
     public Boolean getHasDisplayDevice() {
         return hasDisplayDevice;
@@ -26,6 +40,14 @@ public class MeetingRoom extends AuditableEntity {
 
     public void setHasDisplayDevice(Boolean hasDisplayDevice) {
         this.hasDisplayDevice = hasDisplayDevice;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
     public Boolean getActive() {
