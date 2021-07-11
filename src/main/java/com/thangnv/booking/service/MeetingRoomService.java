@@ -1,4 +1,9 @@
 package com.thangnv.booking.service;
 
+import com.thangnv.booking.dto.MeetingRoomDTO;
+
+import java.util.List;
+
 public interface MeetingRoomService {
+    List<MeetingRoomDTO> listAllMeetingRoom();
 }

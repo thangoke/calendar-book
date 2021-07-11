@@ -26,6 +26,10 @@ public class MeetingRoom extends AuditableEntity {
     @Column(name = "active")
     private Boolean active;
 
+    public String getId() {
+        return id;
+    }
+
     public String getRoomName() {
         return roomName;
     }
