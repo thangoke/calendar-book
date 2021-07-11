@@ -25,7 +25,7 @@ public class MeetingRoomController {
     MeetingRoomDTO listAllMeetingRoom(@RequestParam Long id) {
         MeetingRoomDTO result = meetingRoomService.getMeetingRoomById(id);
         if (result == null) {
-            throw new DataNotFoundException("Room does not exist");
+            throw new DataNotFoundException(String.format("Meeting room not found, id = [%s]", id));
         }
 
         return result;
