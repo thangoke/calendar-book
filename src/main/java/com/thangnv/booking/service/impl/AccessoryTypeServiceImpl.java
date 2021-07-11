@@ -2,11 +2,13 @@ package com.thangnv.booking.service.impl;
 
 import com.thangnv.booking.controller.exception.DataNotFoundException;
 import com.thangnv.booking.controller.exception.MissingQueryParamException;
+import com.thangnv.booking.controller.exception.StillReferenceException;
 import com.thangnv.booking.dto.AccessoryTypeDTO;
 import com.thangnv.booking.entity.AccessoryType;
 import com.thangnv.booking.repository.AccessoryTypeRepository;
 import com.thangnv.booking.service.AccessoryTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -94,6 +96,10 @@ public class AccessoryTypeServiceImpl implements AccessoryTypeService {
             throw new DataNotFoundException(String.format("Accessory type not found, id = [%s]", id));
         }
 
-        accessoryTypeRepository.delete(optionalAccessoryType.get());
+        try {
+            accessoryTypeRepository.delete(optionalAccessoryType.get());
+        } catch (DataIntegrityViolationException e) {
+            throw new StillReferenceException(String.format("Accessory type, id = [%s], still used by another Entity, delete all reference entity first", id));
+        }
     }
 }

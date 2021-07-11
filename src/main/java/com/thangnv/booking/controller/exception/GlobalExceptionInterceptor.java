@@ -23,4 +23,10 @@ public class GlobalExceptionInterceptor extends ResponseEntityExceptionHandler {
         String bodyOfResponse = String.format("[Data-not-found] %s", ex.getLocalizedMessage());
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler(value = {StillReferenceException.class})
+    protected ResponseEntity<Object> handleStillReferenceException(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = String.format("[Still-reference] %s", ex.getLocalizedMessage());
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }
