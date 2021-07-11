@@ -20,7 +20,7 @@ public class MeetingRoomController {
     }
 
     @GetMapping("/get/{id}")
-    MeetingRoomDTO listAllMeetingRoom(@RequestParam Long id) {
+    MeetingRoomDTO getById(@RequestParam Long id) {
         MeetingRoomDTO result = meetingRoomService.getMeetingRoomById(id);
         if (result == null) {
             throw new DataNotFoundException(String.format("Meeting room not found, id = [%s]", id));
