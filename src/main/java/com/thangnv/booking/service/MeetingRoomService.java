@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MeetingRoomService {
     List<MeetingRoomDTO> listAllMeetingRoom();
+
+    MeetingRoomDTO getMeetingRoomById(String id);
 }
