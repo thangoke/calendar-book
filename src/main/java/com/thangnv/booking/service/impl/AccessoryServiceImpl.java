@@ -30,6 +30,7 @@ public class AccessoryServiceImpl implements AccessoryService {
         dto.id = accessory.getId();
         dto.code = accessory.getCode();
         dto.name = accessory.getName();
+        dto.accessoryTypeId = accessory.getAccessoryType().getId();
 
         return dto;
     }
