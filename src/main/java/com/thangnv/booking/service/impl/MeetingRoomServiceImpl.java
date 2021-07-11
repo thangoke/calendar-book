@@ -88,6 +88,16 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     @Override
     public void deleteMeetingRoom(Long id) {
+        if (id == null) {
+            throw new RuntimeException("Missing id");
+        }
 
+        Optional<MeetingRoom> optionalMeetingRoom = meetingRoomRepository.findById(id);
+
+        if (!optionalMeetingRoom.isPresent()) {
+            throw new RuntimeException(String.format("Meeting room not found, id = [%s]", id));
+        }
+
+        meetingRoomRepository.delete(optionalMeetingRoom.get());
     }
 }
