@@ -35,4 +35,14 @@ public class MeetingRoomController {
     MeetingRoomDTO addMeetingRoom(@RequestBody MeetingRoomDTO dto) {
         return meetingRoomService.addMeetingRoom(dto);
     }
+
+    @PutMapping("/modify")
+    MeetingRoomDTO modifyMeetingRoom(@RequestBody MeetingRoomDTO dto) {
+        return meetingRoomService.modifyMeetingRoom(dto);
+    }
+
+    @DeleteMapping("/delete")
+    void deleteMeetingRoom(@RequestParam Long id) {
+        meetingRoomService.deleteMeetingRoom(id);
+    }
 }

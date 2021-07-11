@@ -10,4 +10,8 @@ public interface MeetingRoomService {
     MeetingRoomDTO getMeetingRoomById(Long id);
 
     MeetingRoomDTO addMeetingRoom(MeetingRoomDTO dto);
+
+    MeetingRoomDTO modifyMeetingRoom(MeetingRoomDTO dto);
+
+    void deleteMeetingRoom(Long id);
 }

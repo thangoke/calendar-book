@@ -61,4 +61,14 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
         MeetingRoom persisted = meetingRoomRepository.save(meetingRoom);
         return this.meetingRoom2DTO(persisted);
     }
+
+    @Override
+    public MeetingRoomDTO modifyMeetingRoom(MeetingRoomDTO dto) {
+        return null;
+    }
+
+    @Override
+    public void deleteMeetingRoom(Long id) {
+
+    }
 }
