@@ -64,7 +64,26 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     @Override
     public MeetingRoomDTO modifyMeetingRoom(MeetingRoomDTO dto) {
-        return null;
+        Objects.requireNonNull(dto);
+
+        if (dto.id == null) {
+            throw new RuntimeException("Missing dto.id");
+        }
+
+        Optional<MeetingRoom> optionalMeetingRoom = meetingRoomRepository.findById(dto.id);
+
+        if (!optionalMeetingRoom.isPresent()) {
+            throw new RuntimeException(String.format("Meeting room not found, id = [%s]", dto.id));
+        }
+
+        MeetingRoom meetingRoom = optionalMeetingRoom.get();
+        meetingRoom.setRoomName(dto.roomName);
+        meetingRoom.setCapacity(dto.capacity);
+        meetingRoom.setHasDisplayDevice(dto.hasDisplayDevice);
+        meetingRoom.setActive(dto.active);
+
+        MeetingRoom persisted = meetingRoomRepository.save(meetingRoom);
+        return this.meetingRoom2DTO(persisted);
     }
 
     @Override
