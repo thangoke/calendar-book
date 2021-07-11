@@ -1,5 +1,7 @@
 package com.thangnv.booking.service.impl;
 
+import com.thangnv.booking.controller.exception.DataNotFoundException;
+import com.thangnv.booking.controller.exception.MissingQueryParamException;
 import com.thangnv.booking.dto.MeetingRoomDTO;
 import com.thangnv.booking.entity.MeetingRoom;
 import com.thangnv.booking.repository.MeetingRoomRepository;
@@ -67,13 +69,13 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
         Objects.requireNonNull(dto);
 
         if (dto.id == null) {
-            throw new RuntimeException("Missing dto.id");
+            throw new MissingQueryParamException("Missing dto.id");
         }
 
         Optional<MeetingRoom> optionalMeetingRoom = meetingRoomRepository.findById(dto.id);
 
         if (!optionalMeetingRoom.isPresent()) {
-            throw new RuntimeException(String.format("Meeting room not found, id = [%s]", dto.id));
+            throw new DataNotFoundException(String.format("Meeting room not found, id = [%s]", dto.id));
         }
 
         MeetingRoom meetingRoom = optionalMeetingRoom.get();
@@ -89,13 +91,13 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     @Override
     public void deleteMeetingRoom(Long id) {
         if (id == null) {
-            throw new RuntimeException("Missing id");
+            throw new MissingQueryParamException("Missing id");
         }
 
         Optional<MeetingRoom> optionalMeetingRoom = meetingRoomRepository.findById(id);
 
         if (!optionalMeetingRoom.isPresent()) {
-            throw new RuntimeException(String.format("Meeting room not found, id = [%s]", id));
+            throw new DataNotFoundException(String.format("Meeting room not found, id = [%s]", id));
         }
 
         meetingRoomRepository.delete(optionalMeetingRoom.get());

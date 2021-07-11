@@ -1,5 +1,6 @@
 package com.thangnv.booking.controller;
 
+import com.thangnv.booking.controller.exception.DataNotFoundException;
 import com.thangnv.booking.dto.MeetingRoomDTO;
 import com.thangnv.booking.service.MeetingRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,10 @@ public class MeetingRoomController {
     }
 
     @GetMapping("/get/{id}")
-    @ResponseBody
     MeetingRoomDTO listAllMeetingRoom(@RequestParam Long id) {
         MeetingRoomDTO result = meetingRoomService.getMeetingRoomById(id);
         if (result == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Room does not exist");
+            throw new DataNotFoundException("Room does not exist");
         }
 
         return result;
