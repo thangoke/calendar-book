@@ -1,7 +1,8 @@
 package com.thangnv.booking.entity;
 
 import com.thangnv.booking.entity.audit.AuditableEntity;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
@@ -9,9 +10,12 @@ import javax.persistence.*;
 @Table(name = "meeting_room")
 public class MeetingRoom extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Type(type = "uuid-char")
-    @Column(name = "id", columnDefinition = "VARCHAR(255)", insertable = false, updatable = false, nullable = false)
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {@Parameter(name = "sequence_name", value = "meeting_room_seq")}
+    )
     private String id;
 
     @Column(name = "room_name")
