@@ -117,7 +117,7 @@ public class AccessoryServiceImpl implements AccessoryService {
         Optional<Accessory> optionalAccessory = accessoryRepository.findById(id);
 
         if (!optionalAccessory.isPresent()) {
-            throw new DataNotFoundException(String.format("Accessory  not found, id = [%s]", id));
+            throw new DataNotFoundException(String.format("Accessory not found, id = [%s]", id));
         }
 
         accessoryRepository.delete(optionalAccessory.get());
