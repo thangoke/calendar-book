@@ -99,7 +99,7 @@ public class AccessoryTypeServiceImpl implements AccessoryTypeService {
         try {
             accessoryTypeRepository.delete(optionalAccessoryType.get());
         } catch (DataIntegrityViolationException e) {
-            throw new StillReferenceException(String.format("Accessory type, id = [%s], still used by another Entity, delete all reference entity first", id));
+            throw new StillReferenceException(String.format("Accessory type, id = [%s], still used by another Entity, delete all referencing entities first", id));
         }
     }
 }
