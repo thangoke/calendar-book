@@ -1,6 +1,7 @@
 package com.thangnv.booking.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ public class Accessory {
     @GenericGenerator(
             name = "sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {@org.hibernate.annotations.Parameter(name = "sequence_name", value = "accessory_seq")}
+            parameters = {@Parameter(name = "sequence_name", value = "accessory_seq")}
     )
     private Long id;
 
