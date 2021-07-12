@@ -1,11 +1,9 @@
 package com.thangnv.booking.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.thangnv.booking.entity.BookingAccessory;
 
-import javax.persistence.OneToMany;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 public class BookingRequestDTO {
     @JsonProperty("id")
@@ -23,8 +21,8 @@ public class BookingRequestDTO {
     @JsonProperty("to_time")
     public Date toTime;
 
-    @OneToMany(mappedBy = "bookingSession")
-    public Set<BookingAccessory> bookedAccessoryList;
+    @JsonProperty("accessory_list")
+    public List<AccessoryDTO> accessoryList;
 
     @JsonProperty("serve_water")
     public Boolean serveWater;
