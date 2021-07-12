@@ -24,7 +24,7 @@ public class BookingController {
     }
 
     @DeleteMapping("/cancel")
-    void cancel(@RequestParam Long id) {
-        bookingService.cancel(id);
+    BookingResponseDTO cancel(@RequestParam Long id) {
+        return bookingService.cancel(id);
     }
 }

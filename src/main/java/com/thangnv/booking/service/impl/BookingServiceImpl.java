@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -105,7 +104,19 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void cancel(Long bookingId) {
+    public BookingResponseDTO cancel(Long bookingId) {
+        if (bookingId == null) {
+            throw new MissingQueryParamException("Missing bookingId");
+        }
 
+        Optional<BookingSession> optionalBookingSession = bookingSessionRepository.findById(bookingId);
+
+        if (!optionalBookingSession.isPresent()) {
+            throw new DataNotFoundException(String.format("Booking session not found, id = [%s]", bookingId));
+        }
+
+        optionalBookingSession.get().setActive(false);
+
+        return this.bookingSession2DTO(bookingSessionRepository.save(optionalBookingSession.get()));
     }
 }
