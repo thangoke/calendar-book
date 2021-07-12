@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -24,10 +24,10 @@ public class BookingSession {
     private MeetingRoom meetingRoom;
 
     @Column(name = "from_time", nullable = false)
-    private Instant fromTime;
+    private Date fromTime;
 
     @Column(name = "to_time", nullable = false)
-    private Instant toTime;
+    private Date toTime;
 
     @Column(name = "num_of_attendance")
     private Integer numOfAttendance;
@@ -67,19 +67,19 @@ public class BookingSession {
         this.numOfAttendance = numOfAttendance;
     }
 
-    public Instant getFromTime() {
+    public Date getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(Instant fromTime) {
+    public void setFromTime(Date fromTime) {
         this.fromTime = fromTime;
     }
 
-    public Instant getToTime() {
+    public Date getToTime() {
         return toTime;
     }
 
-    public void setToTime(Instant toTime) {
+    public void setToTime(Date toTime) {
         this.toTime = toTime;
     }
 

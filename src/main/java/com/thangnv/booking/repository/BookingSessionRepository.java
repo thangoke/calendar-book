@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -14,11 +14,11 @@ public interface BookingSessionRepository extends JpaRepository<BookingSession, 
 
     @Query(value = " SELECT bs.* FROM " +
             " ( " +
-            " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.from_time < :toTime " +
+            " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.from_time < :toTime AND bs.to_time > :toTime" +
             " UNION " +
-            " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.to_time > :fromTime " +
+            " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.from_time < :fromTime AND bs.to_time > :fromTime " +
             " ) bs " +
             " ORDER BY bs.from_time ",
             nativeQuery = true)
-    List<BookingSession> findAllByTimeRange(@Param("fromTime") Instant fromTime, @Param("toTime") Instant toTime);
+    List<BookingSession> findAllByTimeRange(@Param("fromTime") Date fromTime, @Param("toTime") Date toTime);
 }

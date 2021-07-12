@@ -31,8 +31,8 @@ public class BookingServiceImpl implements BookingService {
         BookingResponseDTO dto = new BookingResponseDTO();
         dto.id = bookingSession.getId();
         dto.meetingRoomId = bookingSession.getMeetingRoom().getId();
-        dto.fromTime = Date.from(bookingSession.getFromTime());
-        dto.toTime = Date.from(bookingSession.getToTime());
+        dto.fromTime = bookingSession.getFromTime();
+        dto.toTime = bookingSession.getToTime();
 
         return dto;
     }
@@ -53,14 +53,14 @@ public class BookingServiceImpl implements BookingService {
             throw new MissingQueryParamException("Missing dto.toTime");
         }
 
-        List<BookingSession> conflictBook = bookingSessionRepository.findAllByTimeRange(dto.fromTime.toInstant(), dto.toTime.toInstant());
+        List<BookingSession> conflictBook = bookingSessionRepository.findAllByTimeRange(dto.fromTime, dto.toTime);
 
         if (conflictBook.size() > 0) {
             StringBuilder sb = new StringBuilder("This time range has already booked: ");
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             for (BookingSession bs : conflictBook) {
-                sb.append(String.format(" [%s -> %s] ", sf.format(Date.from(bs.getFromTime())), sf.format(Date.from(bs.getToTime()))));
+                sb.append(String.format(" [%s -> %s] ", sf.format(bs.getFromTime()), sf.format(bs.getToTime())));
             }
 
             throw new DataNotFoundException(sb.toString());
@@ -98,8 +98,8 @@ public class BookingServiceImpl implements BookingService {
         bookingSession.setActive(true);
         bookingSession.setMeetingRoom(optionalMeetingRoom.get());
 
-        bookingSession.setFromTime(dto.fromTime.toInstant());
-        bookingSession.setToTime(dto.toTime.toInstant());
+        bookingSession.setFromTime(dto.fromTime);
+        bookingSession.setToTime(dto.toTime);
 
         return this.bookingSession2DTO(bookingSessionRepository.save(bookingSession));
     }
