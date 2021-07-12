@@ -1,24 +1,45 @@
 package com.thangnv.booking.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import java.io.Serializable;
+import javax.persistence.*;
 
-@Embeddable
-public class BookingAccessory implements Serializable {
-    @Column(name = "booking_session_id")
-    Long bookingSessionId;
+@Entity
+public class BookingAccessory {
+    @EmbeddedId
+    private BookingAccessoryKey id;
 
-    @Column(name = "accessory_id")
-    Long accessoryId;
+    @ManyToOne
+    @MapsId("bookingSessionId")
+    @JoinColumn(name = "booking_session_id")
+    private BookingAccessory bookingAccessory;
 
-    @Override
-    public int hashCode() {
-        return bookingSessionId.intValue() << 16 | accessoryId.intValue();
+    @ManyToOne
+    @MapsId("accessoryId")
+    @JoinColumn(name = "accessory_id")
+    private Accessory accessory;
+
+    private Boolean approved;
+
+    public BookingAccessory getBookingSession() {
+        return bookingAccessory;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return (obj instanceof BookingAccessory) && this.hashCode() == obj.hashCode();
+    public void setBookingSession(BookingAccessory bookingAccessory) {
+        this.bookingAccessory = bookingAccessory;
+    }
+
+    public Accessory getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(Accessory accessory) {
+        this.accessory = accessory;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }
