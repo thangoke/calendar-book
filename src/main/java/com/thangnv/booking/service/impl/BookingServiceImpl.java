@@ -12,8 +12,7 @@ import com.thangnv.booking.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -58,12 +57,12 @@ public class BookingServiceImpl implements BookingService {
 
         if (conflictBook.size() > 0) {
             StringBuilder sb = new StringBuilder("This time range has already booked: ");
-
-            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             for (BookingSession bs : conflictBook) {
-                sb.append(String.format(" [%s -> %s] ", DATE_TIME_FORMATTER.format(bs.getFromTime()), DATE_TIME_FORMATTER.format(bs.getToTime())));
+                sb.append(String.format(" [%s -> %s] ", sf.format(bs.getFromTime()), sf.format(bs.getToTime())));
             }
+
             throw new DataNotFoundException(sb.toString());
 
 //            Instant min = null;
@@ -81,8 +80,8 @@ public class BookingServiceImpl implements BookingService {
 //                }
 //            }
 //
-//            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//            throw new DataNotFoundException(String.format("This time range has already booked: [%s -> %s], or you can choose another time", DATE_TIME_FORMATTER.format(max), DATE_TIME_FORMATTER.format(min)));
+//            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            throw new DataNotFoundException(String.format("This time range has already booked: [%s -> %s], or you can choose another time", sf.format(max), sf.format(min)));
         }
 
         if (dto.meetingRoomId == null) {
