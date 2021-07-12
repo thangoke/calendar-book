@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.Instant;
 import java.util.Set;
 
 @Entity
@@ -27,10 +27,10 @@ public class BookingSession {
     private Integer numOfAttendance;
 
     @Column(name = "from_time", nullable = false)
-    private Date fromTime;
+    private Instant fromTime;
 
     @Column(name = "to_time", nullable = false)
-    private Date toTime;
+    private Instant toTime;
 
     @OneToMany(mappedBy = "bookingSession")
     private Set<BookingAccessory> bookedAccessoryList;
@@ -43,6 +43,9 @@ public class BookingSession {
 
     @Column(name = "serve_fruit")
     private Boolean serveFruit;
+
+    @Column(name = "active")
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -64,19 +67,19 @@ public class BookingSession {
         this.numOfAttendance = numOfAttendance;
     }
 
-    public Date getFromTime() {
+    public Instant getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(Date fromTime) {
+    public void setFromTime(Instant fromTime) {
         this.fromTime = fromTime;
     }
 
-    public Date getToTime() {
+    public Instant getToTime() {
         return toTime;
     }
 
-    public void setToTime(Date toTime) {
+    public void setToTime(Instant toTime) {
         this.toTime = toTime;
     }
 
@@ -110,5 +113,13 @@ public class BookingSession {
 
     public void setServeFruit(Boolean serveFruit) {
         this.serveFruit = serveFruit;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
