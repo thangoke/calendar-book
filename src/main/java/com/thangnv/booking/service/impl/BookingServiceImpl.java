@@ -71,7 +71,7 @@ public class BookingServiceImpl implements BookingService {
                 }
             }
 
-            throw new RuntimeException(String.format("This time range has already booked: From may be > %s, To may be < %s, or you can choose another time", min, max));
+            throw new DataNotFoundException(String.format("This time range has already booked: From may be > %s, To may be < %s, or you can choose another time", min, max));
         }
 
         if (dto.meetingRoomId == null) {
@@ -85,6 +85,7 @@ public class BookingServiceImpl implements BookingService {
         }
 
         BookingSession bookingSession = new BookingSession();
+        bookingSession.setActive(true);
         bookingSession.setMeetingRoom(optionalMeetingRoom.get());
 
         bookingSession.setFromTime(dto.fromTime.toInstant());
