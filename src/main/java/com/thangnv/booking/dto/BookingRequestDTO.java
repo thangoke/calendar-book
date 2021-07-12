@@ -1,5 +1,6 @@
 package com.thangnv.booking.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -16,9 +17,11 @@ public class BookingRequestDTO {
     public Integer numOfAttendance;
 
     @JsonProperty("from_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     public Date fromTime;
 
     @JsonProperty("to_time")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     public Date toTime;
 
     @JsonProperty("accessory_list")
