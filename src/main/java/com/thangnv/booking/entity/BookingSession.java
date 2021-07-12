@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "booking_session")
@@ -20,4 +22,93 @@ public class BookingSession {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "meeting_room_id", nullable = false)
     private MeetingRoom meetingRoom;
+
+    @Column(name = "num_of_attendance", nullable = false)
+    private Integer numOfAttendance;
+
+    @Column(name = "from_time", nullable = false)
+    private Date fromTime;
+
+    @Column(name = "to_time", nullable = false)
+    private Date toTime;
+
+    @Column(name = "booked_accessory")
+    private Set<Accessory> bookedAccessory;
+
+    @Column(name = "serve_water")
+    private Boolean serveWater;
+
+    @Column(name = "serve_fast_food")
+    private Boolean serveFastFood;
+
+    @Column(name = "serve_fruit")
+    private Boolean serveFruit;
+
+    public Long getId() {
+        return id;
+    }
+
+    public MeetingRoom getMeetingRoom() {
+        return meetingRoom;
+    }
+
+    public void setMeetingRoom(MeetingRoom meetingRoom) {
+        this.meetingRoom = meetingRoom;
+    }
+
+    public Integer getNumOfAttendance() {
+        return numOfAttendance;
+    }
+
+    public void setNumOfAttendance(Integer numOfAttendance) {
+        this.numOfAttendance = numOfAttendance;
+    }
+
+    public Date getFromTime() {
+        return fromTime;
+    }
+
+    public void setFromTime(Date fromTime) {
+        this.fromTime = fromTime;
+    }
+
+    public Date getToTime() {
+        return toTime;
+    }
+
+    public void setToTime(Date toTime) {
+        this.toTime = toTime;
+    }
+
+    public Set<Accessory> getBookedAccessory() {
+        return bookedAccessory;
+    }
+
+    public void setBookedAccessory(Set<Accessory> bookedAccessory) {
+        this.bookedAccessory = bookedAccessory;
+    }
+
+    public Boolean getServeWater() {
+        return serveWater;
+    }
+
+    public void setServeWater(Boolean serveWater) {
+        this.serveWater = serveWater;
+    }
+
+    public Boolean getServeFastFood() {
+        return serveFastFood;
+    }
+
+    public void setServeFastFood(Boolean serveFastFood) {
+        this.serveFastFood = serveFastFood;
+    }
+
+    public Boolean getServeFruit() {
+        return serveFruit;
+    }
+
+    public void setServeFruit(Boolean serveFruit) {
+        this.serveFruit = serveFruit;
+    }
 }
