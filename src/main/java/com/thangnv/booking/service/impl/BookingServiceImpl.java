@@ -33,6 +33,13 @@ public class BookingServiceImpl implements BookingService {
         dto.fromTime = bookingSession.getFromTime();
         dto.toTime = bookingSession.getToTime();
 
+        dto.numOfAttendance = bookingSession.getNumOfAttendance();
+        dto.serveWater = bookingSession.getServeWater();
+        dto.serveFastFood = bookingSession.getServeFastFood();
+        dto.serveFruit = bookingSession.getServeFruit();
+
+        dto.accessoryList = null;
+
         return dto;
     }
 
@@ -99,6 +106,11 @@ public class BookingServiceImpl implements BookingService {
 
         bookingSession.setFromTime(dto.fromTime);
         bookingSession.setToTime(dto.toTime);
+
+        bookingSession.setNumOfAttendance(dto.numOfAttendance);
+        bookingSession.setServeWater(dto.serveWater);
+        bookingSession.setServeFastFood(dto.serveFastFood);
+        bookingSession.setServeFruit(dto.serveFruit);
 
         return this.bookingSession2DTO(bookingSessionRepository.save(bookingSession));
     }
