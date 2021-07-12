@@ -23,14 +23,14 @@ public class BookingSession {
     @JoinColumn(name = "meeting_room_id", nullable = false)
     private MeetingRoom meetingRoom;
 
-    @Column(name = "num_of_attendance", nullable = false)
-    private Integer numOfAttendance;
-
     @Column(name = "from_time", nullable = false)
     private Instant fromTime;
 
     @Column(name = "to_time", nullable = false)
     private Instant toTime;
+
+    @Column(name = "num_of_attendance")
+    private Integer numOfAttendance;
 
     @OneToMany(mappedBy = "bookingSession")
     private Set<BookingAccessory> bookedAccessoryList;
