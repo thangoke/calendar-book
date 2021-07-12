@@ -35,4 +35,7 @@ public class BookingResponseDTO {
 
     @JsonProperty("serve_fruit")
     public Boolean serveFruit;
+
+    @JsonProperty("active")
+    public Boolean active;
 }

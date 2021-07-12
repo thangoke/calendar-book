@@ -40,6 +40,8 @@ public class BookingServiceImpl implements BookingService {
 
         dto.accessoryList = null;
 
+        dto.active = bookingSession.getActive();
+
         return dto;
     }
 
