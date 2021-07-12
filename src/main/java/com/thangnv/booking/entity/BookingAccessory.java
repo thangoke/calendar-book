@@ -3,6 +3,7 @@ package com.thangnv.booking.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "booking_accessory")
 public class BookingAccessory {
     @EmbeddedId
     private BookingAccessoryKey id;
