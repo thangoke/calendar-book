@@ -12,7 +12,8 @@ import com.thangnv.booking.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -56,22 +57,32 @@ public class BookingServiceImpl implements BookingService {
         List<BookingSession> conflictBook = bookingSessionRepository.findAllByTimeRange(dto.fromTime.toInstant(), dto.toTime.toInstant());
 
         if (conflictBook.size() > 0) {
-            Instant min = null;
-            Instant max = null;
+            StringBuilder sb = new StringBuilder("This time range has already booked: ");
+
+            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
 
             for (BookingSession bs : conflictBook) {
-                if (min == null) min = bs.getToTime();
-                if (max == null) max = bs.getFromTime();
-
-                if (min.compareTo(bs.getToTime()) > 0) {
-                    min = bs.getToTime();
-                }
-                if (max.compareTo(bs.getFromTime()) < 0) {
-                    max = bs.getFromTime();
-                }
+                sb.append(String.format(" [%s -> %s] ", DATE_TIME_FORMATTER.format(bs.getFromTime()), DATE_TIME_FORMATTER.format(bs.getToTime())));
             }
+            throw new DataNotFoundException(sb.toString());
 
-            throw new DataNotFoundException(String.format("This time range has already booked: From may be > %s, To may be < %s, or you can choose another time", min, max));
+//            Instant min = null;
+//            Instant max = null;
+//
+//            for (BookingSession bs : conflictBook) {
+//                if (min == null) min = bs.getToTime();
+//                if (max == null) max = bs.getFromTime();
+//
+//                if (min.compareTo(bs.getToTime()) > 0) {
+//                    min = bs.getToTime();
+//                }
+//                if (max.compareTo(bs.getFromTime()) < 0) {
+//                    max = bs.getFromTime();
+//                }
+//            }
+//
+//            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
+//            throw new DataNotFoundException(String.format("This time range has already booked: [%s -> %s], or you can choose another time", DATE_TIME_FORMATTER.format(max), DATE_TIME_FORMATTER.format(min)));
         }
 
         if (dto.meetingRoomId == null) {

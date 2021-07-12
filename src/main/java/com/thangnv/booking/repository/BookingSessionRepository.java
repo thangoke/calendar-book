@@ -17,7 +17,8 @@ public interface BookingSessionRepository extends JpaRepository<BookingSession, 
             " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.from_time < :toTime " +
             " UNION " +
             " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.to_time > :fromTime " +
-            " ) bs ",
+            " ) bs " +
+            " ORDER BY bs.from_time ",
             nativeQuery = true)
     List<BookingSession> findAllByTimeRange(@Param("fromTime") Instant fromTime, @Param("toTime") Instant toTime);
 }
