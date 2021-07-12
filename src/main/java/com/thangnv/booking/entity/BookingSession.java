@@ -32,8 +32,8 @@ public class BookingSession {
     @Column(name = "to_time", nullable = false)
     private Date toTime;
 
-    @Column(name = "booked_accessory")
-    private Set<Accessory> bookedAccessory;
+    @OneToMany(mappedBy = "bookingSession")
+    private Set<BookingAccessory> bookedAccessoryList;
 
     @Column(name = "serve_water")
     private Boolean serveWater;
@@ -80,12 +80,12 @@ public class BookingSession {
         this.toTime = toTime;
     }
 
-    public Set<Accessory> getBookedAccessory() {
-        return bookedAccessory;
+    public Set<BookingAccessory> getBookedAccessoryList() {
+        return bookedAccessoryList;
     }
 
-    public void setBookedAccessory(Set<Accessory> bookedAccessory) {
-        this.bookedAccessory = bookedAccessory;
+    public void setBookedAccessoryList(Set<BookingAccessory> bookedAccessoryList) {
+        this.bookedAccessoryList = bookedAccessoryList;
     }
 
     public Boolean getServeWater() {

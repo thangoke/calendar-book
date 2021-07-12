@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "accessory")
@@ -26,6 +27,9 @@ public class Accessory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accessory_type_id", nullable = false)
     private AccessoryType accessoryType;
+
+    @OneToMany(mappedBy = "accessory")
+    private Set<BookingAccessory> bookingAccessoryList;
 
     public Long getId() {
         return id;
@@ -53,5 +57,13 @@ public class Accessory {
 
     public void setAccessoryType(AccessoryType accessoryType) {
         this.accessoryType = accessoryType;
+    }
+
+    public Set<BookingAccessory> getBookingAccessoryList() {
+        return bookingAccessoryList;
+    }
+
+    public void setBookingAccessoryList(Set<BookingAccessory> bookingAccessoryList) {
+        this.bookingAccessoryList = bookingAccessoryList;
     }
 }

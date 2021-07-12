@@ -10,7 +10,7 @@ public class BookingAccessory {
     @ManyToOne
     @MapsId("bookingSessionId")
     @JoinColumn(name = "booking_session_id")
-    private BookingAccessory bookingAccessory;
+    private BookingSession bookingSession;
 
     @ManyToOne
     @MapsId("accessoryId")
@@ -19,12 +19,12 @@ public class BookingAccessory {
 
     private Boolean approved;
 
-    public BookingAccessory getBookingSession() {
-        return bookingAccessory;
+    public BookingSession getBookingSession() {
+        return bookingSession;
     }
 
-    public void setBookingSession(BookingAccessory bookingAccessory) {
-        this.bookingAccessory = bookingAccessory;
+    public void setBookingSession(BookingSession bookingSession) {
+        this.bookingSession = bookingSession;
     }
 
     public Accessory getAccessory() {
