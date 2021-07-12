@@ -60,7 +60,7 @@ public class BookingServiceImpl implements BookingService {
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             for (BookingSession bs : conflictBook) {
-                sb.append(String.format(" [%s -> %s] ", sf.format(bs.getFromTime()), sf.format(bs.getToTime())));
+                sb.append(String.format(" [%s -> %s] ", sf.format(Date.from(bs.getFromTime())), sf.format(Date.from(bs.getToTime()))));
             }
 
             throw new DataNotFoundException(sb.toString());
