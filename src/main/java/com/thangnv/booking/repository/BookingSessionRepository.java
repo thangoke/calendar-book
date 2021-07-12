@@ -20,7 +20,7 @@ public interface BookingSessionRepository extends JpaRepository<BookingSession, 
             " UNION " +
             " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.from_time = :fromTime " +
             " UNION " +
-            " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.to_time = :to_time " +
+            " SELECT bs.* FROM booking_session bs WHERE bs.active = true AND bs.to_time = :toTime " +
             " ) bs " +
             " ORDER BY bs.from_time ",
             nativeQuery = true)
