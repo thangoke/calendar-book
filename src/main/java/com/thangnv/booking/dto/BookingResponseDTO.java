@@ -1,4 +1,35 @@
 package com.thangnv.booking.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+import java.util.List;
+
 public class BookingResponseDTO {
+    @JsonProperty("id")
+    public Long id;
+
+    @JsonProperty("meeting_room_id")
+    public Long meetingRoomId;
+
+    @JsonProperty("num_of_attendance")
+    public Integer numOfAttendance;
+
+    @JsonProperty("from_time")
+    public Date fromTime;
+
+    @JsonProperty("to_time")
+    public Date toTime;
+
+    @JsonProperty("accessory_list")
+    public List<AccessoryDTO> accessoryList;
+
+    @JsonProperty("serve_water")
+    public Boolean serveWater;
+
+    @JsonProperty("serve_fast_food")
+    public Boolean serveFastFood;
+
+    @JsonProperty("serve_fruit")
+    public Boolean serveFruit;
 }

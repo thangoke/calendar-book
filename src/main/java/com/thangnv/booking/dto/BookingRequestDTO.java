@@ -22,7 +22,7 @@ public class BookingRequestDTO {
     public Date toTime;
 
     @JsonProperty("accessory_list")
-    public List<AccessoryDTO> accessoryList;
+    public List<Long> accessoryList;
 
     @JsonProperty("serve_water")
     public Boolean serveWater;
