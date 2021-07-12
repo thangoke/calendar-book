@@ -59,7 +59,7 @@ public class BookingServiceImpl implements BookingService {
         if (conflictBook.size() > 0) {
             StringBuilder sb = new StringBuilder("This time range has already booked: ");
 
-            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
+            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
             for (BookingSession bs : conflictBook) {
                 sb.append(String.format(" [%s -> %s] ", DATE_TIME_FORMATTER.format(bs.getFromTime()), DATE_TIME_FORMATTER.format(bs.getToTime())));
@@ -81,7 +81,7 @@ public class BookingServiceImpl implements BookingService {
 //                }
 //            }
 //
-//            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
+//            DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 //            throw new DataNotFoundException(String.format("This time range has already booked: [%s -> %s], or you can choose another time", DATE_TIME_FORMATTER.format(max), DATE_TIME_FORMATTER.format(min)));
         }
 
