@@ -17,12 +17,12 @@ public class BookingRequestDTO {
     public Integer numOfAttendance;
 
     @JsonProperty("from_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Ho_Chi_Minh")
-    public Date fromTime;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Ho_Chi_Minh")
+    public String fromTime = "yyyy-MM-dd hh:mm:ss";
 
     @JsonProperty("to_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Ho_Chi_Minh")
-    public Date toTime;
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Ho_Chi_Minh")
+    public String toTime = "yyyy-MM-dd hh:mm:ss";
 
     @JsonProperty("accessory_list")
     public List<Long> accessoryList;

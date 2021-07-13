@@ -29,4 +29,10 @@ public class GlobalExceptionInterceptor extends ResponseEntityExceptionHandler {
         String bodyOfResponse = String.format("[Still-reference] %s", ex.getLocalizedMessage());
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+    @ExceptionHandler(value = {DateFormatException.class})
+    protected ResponseEntity<Object> handleDateFormatException(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = String.format("[Date-time-format] %s", ex.getLocalizedMessage());
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }

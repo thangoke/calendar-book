@@ -9,6 +9,7 @@ import com.thangnv.booking.entity.MeetingRoom;
 import com.thangnv.booking.repository.BookingSessionRepository;
 import com.thangnv.booking.repository.MeetingRoomRepository;
 import com.thangnv.booking.service.BookingService;
+import com.thangnv.booking.utils.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +62,9 @@ public class BookingServiceImpl implements BookingService {
             throw new MissingQueryParamException("Missing dto.toTime");
         }
 
-        List<BookingSession> conflictBook = bookingSessionRepository.findAllByTimeRange(dto.fromTime, dto.toTime);
+        List<BookingSession> conflictBook = bookingSessionRepository.findAllByTimeRange(
+                DateTimeUtils.string2Date(dto.fromTime, "yyyy-MM-dd hh:mm:ss"),
+                DateTimeUtils.string2Date(dto.toTime, "yyyy-MM-dd hh:mm:ss"));
 
         if (conflictBook.size() > 0) {
             StringBuilder sb = new StringBuilder("This time range has already booked: ");
@@ -106,8 +109,8 @@ public class BookingServiceImpl implements BookingService {
         bookingSession.setActive(true);
         bookingSession.setMeetingRoom(optionalMeetingRoom.get());
 
-        bookingSession.setFromTime(dto.fromTime);
-        bookingSession.setToTime(dto.toTime);
+        bookingSession.setFromTime(DateTimeUtils.string2Date(dto.fromTime, "yyyy-MM-dd hh:mm:ss"));
+        bookingSession.setToTime(DateTimeUtils.string2Date(dto.toTime, "yyyy-MM-dd hh:mm:ss"));
 
         bookingSession.setNumOfAttendance(dto.numOfAttendance);
         bookingSession.setServeWater(dto.serveWater);
